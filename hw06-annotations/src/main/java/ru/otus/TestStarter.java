@@ -19,8 +19,6 @@ public class TestStarter {
 
     public TestStarter(String className) throws ClassNotFoundException {
         testClass = Class.forName(className);
-        prepare();
-        runTest(testClass);
     }
 
     private void prepare() {
@@ -35,7 +33,9 @@ public class TestStarter {
         });
     }
 
-    private void runTest(Class testClass) {
+    public void runTest() {
+
+        prepare();
 
         int all = 0;
         int failed = 0;
@@ -44,11 +44,16 @@ public class TestStarter {
             all++;
             try {
                 Object object = testClass.getDeclaredConstructor().newInstance();
-                startMethods(setUpMethods, object);
-                testMethod.invoke(object);
-                startMethods(tearDownMethods, object);
+                try {
+                    startMethods(setUpMethods, object);
+                    testMethod.invoke(object);
+                } catch (Exception e) {
+                    failed++;
+                } finally {
+                    startMethods(tearDownMethods, object);
+                }
             } catch (Exception e) {
-                failed++;
+                System.err.println("Object creation occured error: " + e.getLocalizedMessage());
             }
         }
 
