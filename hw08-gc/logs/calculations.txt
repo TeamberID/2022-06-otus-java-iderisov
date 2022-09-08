@@ -1,0 +1,19 @@
+#####################  before  #########################
+256 - java.lang.OutOfMemoryError: Java heap space
+512 - msec:8630
+768 - msec:8134
+1024 -msec:7833
+1280 -msec:7692
+1536 -msec:7561
+1792 -msec:6932 - best result
+2048 -msec:7392
+
+#####################  after  #########################
+256 - msec:650 - best result
+512 - msec:651
+768 - msec:661
+1024 -msec:647
+1280 -msec:657
+1536 -msec:652
+1792 -msec:654
+2048 -msec:650
