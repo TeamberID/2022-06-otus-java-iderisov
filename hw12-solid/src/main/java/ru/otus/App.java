@@ -6,28 +6,28 @@ import java.util.HashMap;
 public class App {
 
     public static void main(String[] args) {
-        ATM betaATM = prepareATM();
+        Atm betaAtm = prepareAtm();
 
 //        betaATM.withdraw(1000000); // EXCEPTION
 
-        betaATM.withdraw(49900);
+        betaAtm.withdraw(49900);
 
-        betaATM.deposit(prepareCash(3));
+        betaAtm.deposit(prepareCash(3));
 
-        betaATM.balance();
+        betaAtm.balance();
 
-        betaATM.deposit(prepareCash(1000)); // EXCEPTION
+        betaAtm.deposit(prepareCash(1000)); // EXCEPTION
 
     }
 
-    private static ATM prepareATM() {
+    private static Atm prepareAtm() {
         HashMap<Denomination, BanknoteStack> banknoteStackHashMap = new HashMap<>();
 
         Arrays.stream(Denomination.values()).forEach(denomination -> {
             banknoteStackHashMap.put(denomination, new BanknoteStack(denomination, 10));
         });
 
-        return new BetaATM(new Cash(banknoteStackHashMap));
+        return new BetaAtm(new Cash(banknoteStackHashMap));
     }
 
     private static Cash prepareCash(int amount) {

@@ -11,8 +11,8 @@ public class Cash {
 
     private final Map<Denomination, BanknoteStack> banknoteMap;
 
-    private final String NOT_ENOUGH_MESSAGE = "В банкомате недостаточно банкнот для выдачи указанной суммы";
-    private final String TOO_MUCH_MESSAGE = "Заполнена ячейка с номиналом: ";
+    public static final String NOT_ENOUGH_MESSAGE = "В банкомате недостаточно банкнот для выдачи указанной суммы";
+    public static final String TOO_MUCH_MESSAGE = "Заполнена ячейка с номиналом: ";
 
     private final int MAX_BANKNOTE_AMOUNT = 1000;
 
@@ -52,7 +52,7 @@ public class Cash {
     }
 
     private void isCorrectSum(int in) {
-        if (in % 100 != 0)
+        if (in % Denomination.HUNDRED.getValue() != 0)
             throw new NotEnoughCashException(NOT_ENOUGH_MESSAGE);
     }
 

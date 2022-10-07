@@ -1,10 +1,10 @@
 package ru.otus;
 
-public class BetaATM implements ATM {
+public class BetaAtm implements Atm {
 
     private final Cash cash;
 
-    public BetaATM(Cash cash) {
+    public BetaAtm(Cash cash) {
         this.cash = cash;
     }
 

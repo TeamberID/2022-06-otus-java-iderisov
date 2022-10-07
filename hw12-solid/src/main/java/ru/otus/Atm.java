@@ -1,6 +1,6 @@
 package ru.otus;
 
-public interface ATM {
+public interface Atm {
     Cash withdraw(int in);
 
     void deposit(Cash in);
