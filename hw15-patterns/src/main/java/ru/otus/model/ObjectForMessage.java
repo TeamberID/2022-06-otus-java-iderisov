@@ -1,5 +1,6 @@
 package ru.otus.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectForMessage {
@@ -11,5 +12,11 @@ public class ObjectForMessage {
 
     public void setData(List<String> data) {
         this.data = data;
+    }
+
+    protected ObjectForMessage copy() {
+        ObjectForMessage obj = new ObjectForMessage();
+        obj.setData(new ArrayList<>(data));
+        return obj;
     }
 }
