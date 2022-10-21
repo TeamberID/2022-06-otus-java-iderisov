@@ -1,9 +1,7 @@
 package ru.otus;
 
 import ru.otus.handler.ComplexProcessor;
-import ru.otus.listener.ListenerPrinterConsole;
 import ru.otus.listener.homework.HistoryListener;
-import ru.otus.memento.Originator;
 import ru.otus.model.Message;
 import ru.otus.model.ObjectForMessage;
 import ru.otus.processor.*;
@@ -16,7 +14,7 @@ public class HomeWork {
 
     public static void main(String[] args) {
         var processors = List.of(new ProcessorSwapFields(),
-                new ProcessorEveryEvenSecond(new Originator(LocalDateTime::now)));
+                new ProcessorEveryEvenSecond(LocalDateTime::now));
 
         var complexProcessor = new ComplexProcessor(processors, ex -> {
         });
