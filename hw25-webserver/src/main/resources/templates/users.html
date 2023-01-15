@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Clients</title>
+</head>
+
+<body>
+    <h4>Create client</h4>
+    <form action="users" method="post">
+        <label>
+            name <br/>
+            <input type="text" name="clientName">
+        </label>
+        <br/>
+        <input type="submit" value="Create">
+    </form>
+
+    </br>
+    <h4>CLIENTS</h4>
+    <ul id="clientList">
+    <#list items as item>
+        <li>${item.id} - ${item.name}</li>
+    </#list>
+    </ul>
+</body>
+</html>
