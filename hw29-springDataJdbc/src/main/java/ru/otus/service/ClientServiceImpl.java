@@ -18,9 +18,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional
     public Client saveClient(String name) {
-        var savedClient = clientRepository.save(new Client(name));
-
-        return savedClient;
+        return clientRepository.save(new Client(name));
     }
 
     @Override
