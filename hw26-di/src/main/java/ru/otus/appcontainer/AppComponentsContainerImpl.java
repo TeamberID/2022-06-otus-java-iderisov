@@ -21,6 +21,33 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
         processConfig(initialConfigClass);
     }
 
+    @Override
+    public <C> C getAppComponent(Class<C> componentClass) throws IllegalArgumentException {
+
+        if (appComponents.stream().filter(comp -> comp.getClass().equals(componentClass) ||
+                Arrays.stream(comp.getClass().getInterfaces()).anyMatch(c -> c.equals(componentClass))).count() > 1)
+            throw new IllegalArgumentException("Not unique bean");
+
+        for (Object component : appComponents) {
+            if (Arrays.stream(component.getClass().getInterfaces()).anyMatch(inter -> inter == componentClass)) {
+                return (C) component;
+            }
+            if (component.getClass() == componentClass) {
+                return (C) component;
+            }
+        }
+
+        throw new IllegalArgumentException("Bean not found");
+    }
+
+    @Override
+    public <C> C getAppComponent(String componentName) {
+        if (!appComponentsByName.containsKey(componentName)) {
+            throw new IllegalArgumentException("Bean not found");
+        }
+        return (C) appComponentsByName.get(componentName);
+    }
+
     private void processConfig(Class<?> configClass) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         checkConfigClass(configClass);
 
@@ -51,30 +78,4 @@ public class AppComponentsContainerImpl implements AppComponentsContainer {
         }
     }
 
-    @Override
-    public <C> C getAppComponent(Class<C> componentClass) throws IllegalArgumentException {
-
-        if (appComponents.stream().filter(comp -> comp.getClass().equals(componentClass) ||
-                Arrays.stream(comp.getClass().getInterfaces()).anyMatch(c -> c.equals(componentClass))).count() > 1)
-            throw new IllegalArgumentException("Not unique bean");
-
-        for (Object component : appComponents) {
-            if (Arrays.stream(component.getClass().getInterfaces()).anyMatch(inter -> inter == componentClass)) {
-                return (C) component;
-            }
-            if (component.getClass() == componentClass) {
-                return (C) component;
-            }
-        }
-
-        throw new IllegalArgumentException("Bean not found");
-    }
-
-    @Override
-    public <C> C getAppComponent(String componentName) {
-        if (!appComponentsByName.containsKey(componentName)) {
-            throw new IllegalArgumentException("Bean not found");
-        }
-        return (C) appComponentsByName.get(componentName);
-    }
 }
